@@ -1,0 +1,123 @@
+* {
+  transition: 0.5s;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+.top{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.intro{
+  width: 40%;
+  padding-right: 5%;
+}
+
+.intro h1 {
+  color: #B5EAEA;
+  font-size: 5rem;
+  margin-bottom: 10px;
+  text-shadow: 3px 3px 0px #B5EAEA;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #27282C;
+}
+
+.intro h3 {
+  font-size: 3rem;
+  margin: 0;
+}
+#svg-box {
+  width:400px;
+  height:400px;
+}
+
+#svg-box svg {
+  width: 100%;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 3px solid #B5EAEA;
+  margin-top: 20px;
+}
+
+#new {
+  background: #B5EAEA;
+}
+
+.buttons button:hover, #new:hover{
+background: hsl(180, 56%, 62%);
+}
+
+.examples-box {
+  margin-top: 150px;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+}
+
+.examples img {
+  margin: 4px;
+}
+
+
+@media(max-width:1190px){
+	.top{
+		flex-wrap: wrap;
+	}
+	.intro{
+		max-width: 500px;
+	}
+
+}
+
+@media(max-width:900px){
+	.intro{
+		width: 500px;
+	}
+  
+  #svg-box{
+    margin-top: 30px;
+  }
+}
+
+@media(max-width:550px){
+	.intro{
+		width: 300px;
+	}
+
+  .buttons button{
+    width: 100%;
+  }
+
+  #svg-box {
+    margin-top: 10px;
+  }
+}

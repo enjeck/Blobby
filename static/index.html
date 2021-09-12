@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Blobby Avatars</title>
+      <meta charset="UTF-8" />
+      <link rel="stylesheet" href="styles.css" />
+      <link rel="icon" type="image/png" href="favicon.png"/>
+     <link rel="shortcut icon" type='image/x-icon' href='favicon.ico' />
+
+   </head>
+   <body>
+      <div id="main">
+        <div class="top">
+          <div class="intro">
+            <h1> Blobby </h1>
+            <h3> Generative blob characters</h3>
+            <p> No characters are the same! Each Blobby character has a different
+              body shape. The shape is always unique, and the colors
+              and eyes are randomly applied to each shape. 
+            </p>
+            <p> Feel free to download the images and any Blobby character wherever 
+              you wish. Ideally, the characters can be used as avatars. </p>
+            <div class="buttons">
+              <button id="new"> New character </button>
+              <button class="download-svg"> Download SVG </button>
+              <button class="download-png"> Download PNG </button>
+            </div>
+          </div>
+          <div class="character">
+            <div id="svg-box">
+            </div>
+            <a href="" id="download-text"></a>
+          </div>
+        </div>
+        
+        <div class="examples-box">
+          <p style="text-align:center"> Some creations </p>
+          <div class="examples">
+          <img src="examples/blobby1.png" alt="" />
+          <img src="examples/blobby2.png" alt="" />
+          <img src="examples/blobby3.png" alt="" />
+          <img src="examples/blobby4.png" alt="" />
+          <img src="examples/blobby5.png" alt="" />
+          <img src="examples/blobby6.png" alt="" />
+          <img src="examples/blobby7.png" alt="" />
+          <img src="examples/blobby8.png" alt="" />
+          <img src="examples/blobby9.png" alt="" />
+          <img src="examples/blobby10.png" alt="" />
+          <img src="examples/blobby11.png" alt="" />
+          <img src="examples/blobby12.png" alt="" />
+          <img src="examples/blobby13.png" alt="" />
+          <img src="examples/blobby14.png" alt="" />
+          <img src="examples/blobby15.png" alt="" />
+          <img src="examples/blobby16.png" alt="" />
+          <img src="examples/blobby17.png" alt="" />
+          <img src="examples/blobby18.png" alt="" />
+          <img src="examples/blobby19.png" alt="" />
+          <img src="examples/blobby20.png" alt="" />
+          <img src="examples/blobby21.png" alt="" />
+          <img src="examples/blobby22.png" alt="" />
+          <img src="examples/blobby23.png" alt="" />
+          <img src="examples/blobby24.png" alt="" />
+          <img src="examples/blobby25.png" alt="" />
+          <img src="examples/blobby26.png" alt="" />
+          <img src="examples/blobby27.png" alt="" />
+          <img src="examples/blobby28.png" alt="" />
+          <img src="examples/blobby29.png" alt="" />
+          <img src="examples/blobby30.png" alt="" />
+          <img src="examples/blobby31.png" alt="" />
+          <img src="examples/blobby32.png" alt="" />
+          <img src="examples/blobby33.png" alt="" />
+          <img src="examples/blobby34.png" alt="" />
+          <img src="examples/blobby35.png" alt="" />
+          <img src="examples/blobby36.png" alt="" />
+        </div>
+        </div>
+      </div>
+      <script>
+ 
+// New Character on page load
+getCharacter() 
+
+ // Click buttons to generate new characters or download
+document.getElementById("new").addEventListener("click", function() {
+  getCharacter();
+})
+document.querySelector(".download-svg").addEventListener("click", function() {
+  download('svg');
+})
+document.querySelector(".download-png").addEventListener("click", function() {
+  download('png');
+})
+
+
+function getCharacter() {
+ async function postChar(url = '', data = {}) {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer', 
+  });
+  let svg = response.json();
+  return svg
+}
+
+postChar('/character')
+  .then(data => {
+    let svgData = data.svg
+    let svgContainer = document.getElementById("svg-box");
+    svgContainer.innerHTML = svgData;
+  });
+}
+
+function download(type) {
+let svgContainer = document.getElementById("svg-box");
+let svgToConvert = {
+  svgCode: svgContainer.innerHTML,
+  type: type
+}
+ async function postPNG(url = '', data = {}) {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer', 
+    body: JSON.stringify(data)
+  });
+  let pngData = response;
+  return pngData
+}
+
+postPNG('/download', svgToConvert)
+     .then(response => response.blob())
+        .then(blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.getElementById("download-text");
+            a.href = url;
+            a.download = `blobby.${type}`; 
+            a.click()   
+        });
+}
+
+
+
+      </script>
+
+   </body>
+</html>
