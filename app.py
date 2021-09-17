@@ -29,4 +29,4 @@ def downloadCharacter():
     return send_file('character.png', mimetype='image/png')
 
 # run app  
-app.run(debug=True)
+# app.run(debug=True)
