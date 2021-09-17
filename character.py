@@ -97,7 +97,7 @@ def generateCharacter():
   blush = '<g><circle  transform = "translate(70, 65)" cx="0" cy="0" r="6" fill="rgba(255,255,255,0.4)" ></circle><circle  transform = "translate(30, 65)" cx="0" cy="0" r="6" fill="rgba(255,255,255,0.4)"></circle></g>'
   
   # Join parts together
-  fullCharacter = header + background + body + blush + stroke + eyes + footer
+  fullCharacter = header + body + blush + stroke + eyes + footer
   return fullCharacter
 
 #print (generateCharacter())
