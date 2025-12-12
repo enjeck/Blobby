@@ -1,19 +1,63 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { generateCharacter } from '@/lib/character';
 
 export default function Home() {
   const [svgContent, setSvgContent] = useState('');
+  const [generatedCharacters, setGeneratedCharacters] = useState<string[]>([]);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const generateNew = () => {
     setSvgContent(generateCharacter());
   };
 
-  // Generate on mount
+  // Generate initial characters
   useEffect(() => {
     generateNew();
+    const initial = Array.from({ length: 8 }, () => generateCharacter());
+    setGeneratedCharacters(initial);
   }, []);
+
+  // Load more characters when scrolling
+  const loadMoreCharacters = useCallback(() => {
+    const newCharacters = Array.from({ length: 4 }, () => generateCharacter());
+    setGeneratedCharacters(prev => [...prev, ...newCharacters]);
+  }, []);
+
+  // Track scroll position for scroll-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 800);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Set up intersection observer for infinite scroll
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreCharacters();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observerRef.current.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [loadMoreCharacters]);
 
   const downloadSVG = () => {
     const blob = new Blob([svgContent], { type: 'image/svg+xml' });
@@ -54,13 +98,17 @@ export default function Home() {
     img.src = url;
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <main className="min-h-screen p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 mb-12 mt-12 items-center">
           <div className="intro">
             <h1 className="text-7xl font-bold mb-4 blobby-title">Blobby</h1>
-            <h3 className="text-4xl mb-4">Generative blob characters</h3>
+            <h3 className="text-4xl mb-4">Random blob characters</h3>
             <p className="mb-4 text-lg">
               No characters are the same! Each Blobby character has a different
               body shape. The shape is always unique, and the colors and eyes are
@@ -102,18 +150,44 @@ export default function Home() {
         {/* Examples section */}
         <div className="mt-32">
           <p className="text-center text-xl mb-6">Some creations</p>
-          <div className="examples grid grid-cols-5 md:grid-cols-10 gap-1 justify-center">
-            {[...Array(30)].map((_, i) => (
-              <img
+          <div className="examples grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 justify-center mx-auto">
+            {generatedCharacters.map((char, i) => (
+              <div
                 key={i}
-                src={`/examples/blobby${i + 1}.png`}
-                alt={`Blobby ${i + 1}`}
-                className="w-full"
+                dangerouslySetInnerHTML={{ __html: char }}
+                className="w-full aspect-square"
               />
             ))}
           </div>
+          {/* Invisible element to trigger loading more */}
+          <div ref={loadMoreRef} className="h-20 flex items-center justify-center">
+            <p className="text-gray-400">Loading more...</p>
+          </div>
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-4 bg-[#B5EAEA] rounded-full shadow-lg hover:bg-[hsl(180,56%,62%)] transition-all z-50"
+          aria-label="Scroll to top"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </button>
+      )}
     </main>
   );
 }
