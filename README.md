@@ -1,4 +1,4 @@
-## blobbies
+## Blobby
 
 <h1 align="center"><img src="blobby.gif" width="250" /> <br />Blobby</h1>
 <p align="center"><strong>Random SVG blob characters</strong></p>
@@ -16,7 +16,7 @@ Try it out: https://enjeck.com/blobby
 Clone the repository and run the project:
 
 ```bash
-git clone https://github.com/enjeck/blobbies.git
+git clone https://github.com/enjeck/Blobby.git
 npm install
 npm run dev
 ```
