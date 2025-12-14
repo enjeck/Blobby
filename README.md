@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## blobbies
 
-## Getting Started
+<h1 align="center"><img src="blobby.gif" width="250" /> <br />Blobby</h1>
+<p align="center"><strong>Random SVG blob characters</strong></p>
 
-First, run the development server:
+No characters are the same! Each Blobby character has a different body shape. The shape is generated fresh each time and is always unique. The colors and eyes are randomly applied to each shape.
+
+Feel free to download the images and use any Blobby character wherever you wish. Ideally, the characters can be used as avatars.
+
+Try it out: https://enjeck.com/blobby
+
+![screenshot](blobbies2.png)
+
+## Run the project
+
+Clone the repository and run the project:
 
 ```bash
+git clone https://github.com/enjeck/blobbies.git
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

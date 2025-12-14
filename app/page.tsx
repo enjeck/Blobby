@@ -108,7 +108,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-8 mb-12 mt-12 items-center">
           <div className="intro">
             <h1 className="text-7xl font-bold mb-4 blobby-title">Blobby</h1>
-            <h3 className="text-4xl mb-4">Random blob characters</h3>
+            <h2 className="text-4xl mb-4">Random blob characters</h2>
             <p className="mb-4 text-lg">
               No characters are the same! Each Blobby character has a different
               body shape. The shape is always unique, and the colors and eyes are
@@ -121,19 +121,22 @@ export default function Home() {
             <div className="flex gap-4 flex-wrap">
               <button
                 onClick={generateNew}
-                className="px-6 py-3 bg-[#B5EAEA] border-3 border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)]"
+                className="px-6 py-3 bg-[#B5EAEA] border-3 border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)] focus:outline-none focus:ring-4 focus:ring-[#B5EAEA] focus:ring-opacity-50"
+                aria-label="Generate new character"
               >
                 New character
               </button>
               <button
                 onClick={downloadSVG}
-                className="px-6 py-3 bg-transparent border-[3px] border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)]"
+                className="px-6 py-3 bg-transparent border-[3px] border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)] focus:outline-none focus:ring-4 focus:ring-[#B5EAEA] focus:ring-opacity-50"
+                aria-label="Download character as SVG file"
               >
                 Download SVG
               </button>
               <button
                 onClick={downloadPNG}
-                className="px-6 py-3 bg-transparent border-[3px] border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)]"
+                className="px-6 py-3 bg-transparent border-[3px] border-[#B5EAEA] rounded-md text-base font-normal cursor-pointer transition-all hover:bg-[hsl(180,56%,62%)] focus:outline-none focus:ring-4 focus:ring-[#B5EAEA] focus:ring-opacity-50"
+                aria-label="Download character as PNG file"
               >
                 Download PNG
               </button>
@@ -143,19 +146,23 @@ export default function Home() {
             <div
               dangerouslySetInnerHTML={{ __html: svgContent }}
               className="w-full max-w-md"
+              role="img"
+              aria-label="Current blob character"
             />
           </div>
         </div>
 
         {/* Examples section */}
         <div className="mt-32">
-          <p className="text-center text-xl mb-6">Some creations</p>
-          <div className="examples grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 justify-center mx-auto">
+          <h2 className="text-center text-3xl font-semibold mb-6">Some creations</h2>
+          <div className="examples grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 justify-center mx-auto" role="region" aria-label="Generated blob characters gallery">
             {generatedCharacters.map((char, i) => (
               <div
                 key={i}
                 dangerouslySetInnerHTML={{ __html: char }}
                 className="w-full aspect-square"
+                role="img"
+                aria-label={`Generated blob character ${i + 1}`}
               />
             ))}
           </div>
@@ -170,8 +177,9 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 bg-[#B5EAEA] rounded-full shadow-lg hover:bg-[hsl(180,56%,62%)] transition-all z-50"
-          aria-label="Scroll to top"
+          className="fixed bottom-8 right-8 p-4 bg-[#B5EAEA] rounded-full shadow-lg hover:bg-[hsl(180,56%,62%)] transition-all z-50 focus:outline-none focus:ring-4 focus:ring-[#B5EAEA] focus:ring-opacity-50"
+          aria-label="Scroll to top of page"
+          title="Back to top"
         >
           <svg
             className="w-6 h-6"
