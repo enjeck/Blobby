@@ -7,7 +7,7 @@ No characters are the same! Each Blobby character has a different body shape. Th
 
 Feel free to download the images and use any Blobby character wherever you wish. Ideally, the characters can be used as avatars.
 
-Try it out: https://enjeck.com/blobby
+Try it out: https://enjeck.com/Blobby
 
 ![screenshot](blobbies2.png)
 
