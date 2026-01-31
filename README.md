@@ -7,6 +7,9 @@ No characters are the same! Each Blobby character has a different body shape. Th
 
 Feel free to download the images and use any Blobby character wherever you wish. Ideally, the characters can be used as avatars.
 
+You can install the package from npm: `npm install blobby-svg`
+The repository is available at: https://github.com/enjeck/blobby-svg
+
 Try it out: https://enjeck.com/Blobby
 
 ![screenshot](blobbies2.png)
